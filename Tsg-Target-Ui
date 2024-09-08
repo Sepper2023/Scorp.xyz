@@ -4,20 +4,24 @@ local TargetName = Instance.new("TextLabel")
 local UICorner = Instance.new("UICorner")
 local TargetHealth = Instance.new("TextLabel")
 local Line = Instance.new("Frame")
+local UiStroke = Instance.new("UIStroke",Main)
+
+UiStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+UiStroke.Enabled = true
+UiStroke.Color = Color3.fromRGB(231, 231, 231)
 
 InfoScreen.Name = "InfoScreen"
 InfoScreen.Parent = game.CoreGui
 InfoScreen.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 InfoScreen.IgnoreGuiInset = true
-InfoScreen.Enabled = false
 
 Main.Name = "Main"
 Main.Parent = InfoScreen
 Main.BackgroundColor3 = Color3.fromRGB(22, 22, 22)
 Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Main.BorderSizePixel = 0
-Main.Position = UDim2.new(0.352941185, 0, 0.0136815924, 0)
-Main.Size = UDim2.new(0.294117659, 0, 0.176616922, 0)
+Main.Position = UDim2.new(0.381534696, 0, 0.0124378111, 0)
+Main.Size = UDim2.new(0.236111104, 0, 0.176616922, 0)
 
 TargetName.Name = "TargetName"
 TargetName.Parent = Main
@@ -25,8 +29,8 @@ TargetName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 TargetName.BackgroundTransparency = 1.000
 TargetName.BorderColor3 = Color3.fromRGB(0, 0, 0)
 TargetName.BorderSizePixel = 0
-TargetName.Position = UDim2.new(0.00704225339, 0, 0, 0)
-TargetName.Size = UDim2.new(0.985915482, 0, 0.158227846, 0)
+TargetName.Position = UDim2.new(0.0168614518, 0, 0, 0)
+TargetName.Size = UDim2.new(0.980000019, 0, 0.158000007, 0)
 TargetName.Font = Enum.Font.Gotham
 TargetName.Text = "reportme232"
 TargetName.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -44,9 +48,9 @@ TargetHealth.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 TargetHealth.BackgroundTransparency = 1.000
 TargetHealth.BorderColor3 = Color3.fromRGB(0, 0, 0)
 TargetHealth.BorderSizePixel = 0
-TargetHealth.Position = UDim2.new(0.00704225339, 0, 0.209999949, 0)
-TargetHealth.Size = UDim2.new(0.990610301, 0, 0.140666798, 0)
-TargetHealth.Font = Enum.Font.Arial
+TargetHealth.Position = UDim2.new(0.0168614518, 0, 0.188873187, 0)
+TargetHealth.Size = UDim2.new(0.980000019, 0, 0.169, 0)
+TargetHealth.Font = Enum.Font.SourceSans
 TargetHealth.Text = "Health: 100"
 TargetHealth.TextColor3 = Color3.fromRGB(255, 255, 255)
 TargetHealth.TextScaled = true
@@ -61,5 +65,3 @@ Line.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Line.BorderSizePixel = 0
 Line.Position = UDim2.new(0, 0, 0.185000002, 0)
 Line.Size = UDim2.new(1, 0, 0.00632911408, 0)
-
-return InfoScreen
