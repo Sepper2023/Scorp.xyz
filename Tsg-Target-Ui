@@ -1,0 +1,62 @@
+local InfoScreen = Instance.new("ScreenGui")
+local Main = Instance.new("Frame")
+local TargetName = Instance.new("TextLabel")
+local UICorner = Instance.new("UICorner")
+local TargetHealth = Instance.new("TextLabel")
+local Line = Instance.new("Frame")
+
+InfoScreen.Name = "InfoScreen"
+InfoScreen.Parent = game.CoreGui
+InfoScreen.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+InfoScreen.IgnoreGuiInset = true
+
+Main.Name = "Main"
+Main.Parent = InfoScreen
+Main.BackgroundColor3 = Color3.fromRGB(22, 22, 22)
+Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Main.BorderSizePixel = 0
+Main.Position = UDim2.new(0.352941185, 0, 0.0136815924, 0)
+Main.Size = UDim2.new(0.294117659, 0, 0.176616922, 0)
+
+TargetName.Name = "TargetName"
+TargetName.Parent = Main
+TargetName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TargetName.BackgroundTransparency = 1.000
+TargetName.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TargetName.BorderSizePixel = 0
+TargetName.Position = UDim2.new(0.00704225339, 0, 0, 0)
+TargetName.Size = UDim2.new(0.985915482, 0, 0.158227846, 0)
+TargetName.Font = Enum.Font.Gotham
+TargetName.Text = "reportme232"
+TargetName.TextColor3 = Color3.fromRGB(255, 255, 255)
+TargetName.TextScaled = true
+TargetName.TextSize = 14.000
+TargetName.TextWrapped = true
+TargetName.TextXAlignment = Enum.TextXAlignment.Left
+
+UICorner.CornerRadius = UDim.new(0, 4)
+UICorner.Parent = Main
+
+TargetHealth.Name = "TargetHealth"
+TargetHealth.Parent = Main
+TargetHealth.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TargetHealth.BackgroundTransparency = 1.000
+TargetHealth.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TargetHealth.BorderSizePixel = 0
+TargetHealth.Position = UDim2.new(0.00704225339, 0, 0.209999949, 0)
+TargetHealth.Size = UDim2.new(0.990610301, 0, 0.140666798, 0)
+TargetHealth.Font = Enum.Font.Arial
+TargetHealth.Text = "Health: 100"
+TargetHealth.TextColor3 = Color3.fromRGB(255, 255, 255)
+TargetHealth.TextScaled = true
+TargetHealth.TextSize = 14.000
+TargetHealth.TextWrapped = true
+TargetHealth.TextXAlignment = Enum.TextXAlignment.Left
+
+Line.Name = "Line"
+Line.Parent = Main
+Line.BackgroundColor3 = Color3.fromRGB(231, 231, 231)
+Line.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Line.BorderSizePixel = 0
+Line.Position = UDim2.new(0, 0, 0.185000002, 0)
+Line.Size = UDim2.new(1, 0, 0.00632911408, 0)
