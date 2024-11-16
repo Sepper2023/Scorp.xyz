@@ -7,7 +7,7 @@ getgenv().Settings = {
     maxDistance = math.huge,
 
     Boxes = {
-        Enabled = true,
+        Enabled = false,
         Outline = true,
         Filled = false,
         Color = Color3.fromRGB(255,255,255),
@@ -15,13 +15,13 @@ getgenv().Settings = {
     },
 
     Tracers = {
-        Enabled = true,
+        Enabled = false,
         Thickness = 1.5,
         Color = Color3.fromRGB(255,255,255)
     },
 
     Names = {
-        Enabled = true,
+        Enabled = false,
         Outline = true
     },
 
@@ -36,7 +36,7 @@ getgenv().Settings = {
     },
 
     Healthbar = {
-        Enabled = true,
+        Enabled = false,
         FillColor = Color3.fromRGB(0,255,0)
     }
 }
