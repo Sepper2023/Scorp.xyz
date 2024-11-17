@@ -1,0 +1,6 @@
+local Code = [[
+  
+  loadstring()
+]]
+
+queue_on_teleport(Code)
