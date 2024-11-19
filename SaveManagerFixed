@@ -79,8 +79,8 @@ local SaveManager = {} do
 	end
 
 	function SaveManager:SetFolder(folder)
-		SaveManager.Folder = folder;
-		SaveManager:BuildFolderTree()
+		self.Folder = folder;
+		self:BuildFolderTree()
 	end
 
 	function SaveManager:Save(name)
