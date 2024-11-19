@@ -144,6 +144,8 @@ local SaveManager = {} do
 	end
 
 	function SaveManager:BuildFolderTree()
+		print("Building folder tree for folder: "..self.Folder)
+	
 		local paths = {
 			self.Folder, --ScorpConfig/UnamedShooter
 			self.Folder .. '/themes',
