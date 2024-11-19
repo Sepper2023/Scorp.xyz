@@ -79,8 +79,8 @@ local SaveManager = {} do
 	end
 
 	function SaveManager:SetFolder(folder)
-		self.Folder = folder;
-		self:BuildFolderTree()
+		SaveManager.Folder = folder;
+		SaveManager:BuildFolderTree()
 	end
 
 	function SaveManager:Save(name)
@@ -145,7 +145,7 @@ local SaveManager = {} do
 
 	function SaveManager:BuildFolderTree()
 		local paths = {
-			self.Folder,
+			self.Folder, --ScorpConfig/UnamedShooter
 			self.Folder .. '/themes',
 			self.Folder .. '/settings'
 		}
