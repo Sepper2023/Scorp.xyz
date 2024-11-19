@@ -277,7 +277,7 @@ local SaveManager = {} do
 		SaveManager:SetIgnoreIndexes({ 'SaveManager_ConfigList', 'SaveManager_ConfigName' })
 	end
 
-	print("building folder tree from loadconfig...")
+	print("building folder tree from loadconfig:",tab)
 	SaveManager:BuildFolderTree()
 end
 
