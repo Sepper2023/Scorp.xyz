@@ -80,6 +80,8 @@ local SaveManager = {} do
 
 	function SaveManager:SetFolder(folder)
 		self.Folder = folder;
+
+		print("building folder tree from setfolder...")
 		self:BuildFolderTree()
 	end
 
@@ -275,6 +277,7 @@ local SaveManager = {} do
 		SaveManager:SetIgnoreIndexes({ 'SaveManager_ConfigList', 'SaveManager_ConfigName' })
 	end
 
+	print("building folder tree from loadconfig...")
 	SaveManager:BuildFolderTree()
 end
 
