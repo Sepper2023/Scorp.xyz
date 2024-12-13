@@ -41,9 +41,7 @@ getgenv().Settings = {
     }
 }
 
-if syn then --Synz drawing sucks so we load the solara one :)
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/dementiaenjoyer/homohack/refs/heads/main/storage/drawing.lua",true))()
-end
+loadstring(game:HttpGet("https://raw.githubusercontent.com/dementiaenjoyer/homohack/refs/heads/main/storage/drawing.lua",true))()
 
 --//Main Variables
 local Players = game:GetService("Players")
