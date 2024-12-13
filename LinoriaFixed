@@ -3541,7 +3541,7 @@ function Library:CreateWindow(...)
 
                     local mPos = InputService:GetMouseLocation();
 
-                    Cursor.Color = Cursor.Color = Color3.fromRGB(255,255,255);
+                    Cursor.Color = Color3.fromRGB(255,255,255);
 
                     Cursor.PointA = Vector2.new(mPos.X, mPos.Y);
                     Cursor.PointB = Vector2.new(mPos.X + 16, mPos.Y + 6);
