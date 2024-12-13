@@ -3506,6 +3506,7 @@ function Library:CreateWindow(...)
     local TransparencyCache = {};
     local Toggled = false;
     local Fading = false;
+    local OldMouseState = InputService.MouseIconEnabled
 
     function Library:Toggle()
         if Fading then
@@ -3518,7 +3519,13 @@ function Library:CreateWindow(...)
         ModalElement.Modal = Toggled;
 
         if Toggled then
+            OldMouseState = InputService.MouseIconEnabled
+
+            InputService.MouseIconEnabled = true
+
             Outer.Visible = true;
+        else
+            InputService.MouseIconEnabled = OldMouseState
         end;
 
         for _, Desc in next, Outer:GetDescendants() do
