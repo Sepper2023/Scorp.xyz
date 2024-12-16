@@ -138,14 +138,14 @@ local function AddPlayer(Plr)
 
                         Elements["Box"].Size = Vector2.new(width, height)
                         Elements["Box"].Position = Vector2.new(legsPos.X - width / 2, legsPos.Y - height / 2)
-                        Elements["Box"].Visible = Settings.Boxes.Enabled and showEsp and true or false
+                        Elements["Box"].Visible = Settings.Boxes.Enabled
                         Elements["Box"].Filled = Settings.Boxes.Filled
                         Elements["Box"].Color = Settings.Boxes.Color
                         Elements["Box"].Transparency = Settings.Boxes.Filled and 0.5 or 1
 
                         Elements["BoxOutline"].Size = Vector2.new(width + 2, height + 2)
                         Elements["BoxOutline"].Position = Vector2.new(legsPos.X - width / 2, legsPos.Y - height / 2) + Vector2.new(-1,-1)
-                        Elements["BoxOutline"].Visible = Settings.Boxes.Enabled and Settings.Boxes.Outline and showEsp and true or false
+                        Elements["BoxOutline"].Visible = Settings.Boxes.Enabled and Settings.Boxes.Outline and true or false
                         Elements["BoxOutline"].Color = Settings.Boxes.OutlineColor
 
                         local BoxTop = Elements["Box"].Position + Vector2.new(Elements["Box"].Size.X / 2,0)
@@ -157,28 +157,28 @@ local function AddPlayer(Plr)
 
                         Elements["Healthbar"].Size = Vector2.new(3,Elements["Box"].Size.Y)
                         Elements["Healthbar"].Position = BoxLeft + Vector2.new(-7,0)
-                        Elements["Healthbar"].Visible = Settings.Healthbar.Enabled and showEsp and true or false
+                        Elements["Healthbar"].Visible = Settings.Healthbar.Enabled
 
                         Elements["HealthbarFilling"].Size = Vector2.new(3, Elements["Box"].Size.Y * HealthRatio)
                         Elements["HealthbarFilling"].Position = BoxLeft + Vector2.new(-7, Elements["Box"].Size.Y * MissingHealth)
                         Elements["HealthbarFilling"].Color = Settings.Healthbar.FillColor
-                        Elements["HealthbarFilling"].Visible = Settings.Healthbar.Enabled and showEsp and true or false
+                        Elements["HealthbarFilling"].Visible = Settings.Healthbar.Enabled
 
                         Elements["NameLabel"].Size = textSize
                         Elements["NameLabel"].Position = BoxTop + Vector2.new(0, -textSize * 1.5)
                         Elements["NameLabel"].Outline = Settings.Names.Outline
-                        Elements["NameLabel"].Visible = Settings.Names.Enabled and showEsp and true or false
+                        Elements["NameLabel"].Visible = Settings.Names.Enabled
 
                         Elements["HealthLabel"].Size = textSize
                         Elements["HealthLabel"].Position = BoxTop + Vector2.new(0, -textSize * 2.5)
                         Elements["HealthLabel"].Text = "Health: " .. math.round(Humanoid.Health)
                         Elements["HealthLabel"].Outline = Settings.HealthText.Outline
-                        Elements["HealthLabel"].Visible = Settings.HealthText.Enabled and showEsp and true or false
+                        Elements["HealthLabel"].Visible = Settings.HealthText.Enabled
 
                         Elements["ToolLabel"].Size = textSize
                         Elements["ToolLabel"].Position = BoxBottom + Vector2.new(0, textSize * 0.1)
                         Elements["ToolLabel"].Outline = Settings.Tool.Outline
-                        Elements["ToolLabel"].Visible = Settings.Tool.Enabled and showEsp and true or false
+                        Elements["ToolLabel"].Visible = Settings.Tool.Enabled
 
                         if Tool then
                             Elements["ToolLabel"].Text = Tool.Name
@@ -190,7 +190,7 @@ local function AddPlayer(Plr)
                         Elements["Tracer"].To = Vector2.new(rootPos.X,rootPos.Y)
                         Elements["Tracer"].Thickness = Settings.Tracers.Thickness
                         Elements["Tracer"].Color = Settings.Tracers.Color
-                        Elements["Tracer"].Visible = Settings.Tracers.Enabled and showEsp and true or false
+                        Elements["Tracer"].Visible = Settings.Tracers.Enabled
 
                         continue
                     end
