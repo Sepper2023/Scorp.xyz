@@ -41,8 +41,6 @@ getgenv().Settings = {
     }
 }
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/dementiaenjoyer/homohack/refs/heads/main/storage/drawing.lua",true))()
-
 --//Main Variables
 local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
