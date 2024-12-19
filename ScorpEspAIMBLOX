@@ -1,0 +1,219 @@
+getgenv().Settings = {
+    refreshRate = nil,
+
+    teamCheck = true,
+    ignoreDead = true,
+    includeSelf = true,
+    maxDistance = math.huge,
+
+    Boxes = {
+        Enabled = false,
+        Outline = true,
+        Filled = false,
+        Color = Color3.fromRGB(255,255,255),
+        OutlineColor = Color3.fromRGB(0,0,0)
+    },
+
+    Tracers = {
+        Enabled = false,
+        Thickness = 1.5,
+        Color = Color3.fromRGB(255,255,255)
+    },
+
+    Names = {
+        Enabled = false,
+        Outline = true
+    },
+
+    Tool = {
+        Enabled = false,
+        Outline = true,
+    },
+
+    HealthText = {
+        Enabled = false,
+        Outline = true
+    },
+
+    Healthbar = {
+        Enabled = false,
+        FillColor = Color3.fromRGB(0,255,0)
+    }
+}
+
+--//Main Variables
+local Players = game:GetService("Players")
+local Player = Players.LocalPlayer
+local Camera = game.Workspace.CurrentCamera
+--//
+
+local function AddPlayer(Plr)
+    task.spawn(function()
+        local PlayerName = Plr.Name
+
+        local Elements = {}
+
+        Elements["Box"] = Drawing.new("Square")
+        Elements["Box"].Color = Color3.fromRGB(255,255,255)
+
+        Elements["BoxOutline"] = Drawing.new("Square")
+        Elements["BoxOutline"].Color = Color3.fromRGB(0,0,0)
+
+        Elements["NameLabel"] = Drawing.new("Text")
+        Elements["NameLabel"].Text = PlayerName
+        Elements["NameLabel"].Center = true
+        Elements["NameLabel"].Color = Color3.fromRGB(255,255,255)
+        Elements["NameLabel"].Outline = true
+
+        Elements["HealthLabel"] = Drawing.new("Text")
+        Elements["HealthLabel"].Text = PlayerName
+        Elements["HealthLabel"].Center = true
+        Elements["HealthLabel"].Color = Color3.fromRGB(255,255,255)
+        Elements["HealthLabel"].Outline = true
+
+        Elements["ToolLabel"] = Drawing.new("Text")
+        Elements["ToolLabel"].Text = "None"
+        Elements["ToolLabel"].Center = true
+        Elements["ToolLabel"].Color = Color3.fromRGB(255,255,255)
+        Elements["ToolLabel"].Outline = true
+
+        Elements["Healthbar"] = Drawing.new("Square")
+        Elements["Healthbar"].Color = Color3.fromRGB(0,0,0)
+
+        Elements["HealthbarFilling"] = Drawing.new("Square")
+        Elements["HealthbarFilling"].Color = Color3.fromRGB(0,255,0)
+        Elements["HealthbarFilling"].Filled = true
+
+        Elements["Tracer"] = Drawing.new("Line")
+        Elements["Tracer"].Color = Color3.fromRGB(255,255,255)
+
+        while Players:FindFirstChild(PlayerName) do
+            task.wait(Settings.refreshRate)
+
+            if Plr.Character and Player.Character then
+                local Tool = Plr.Character:FindFirstChildWhichIsA("Tool")
+
+                local PlayerHmrp = Player.Character:FindFirstChild("HumanoidRootPart")
+
+                local Hmrp = Plr.Character:FindFirstChild("HumanoidRootPart")
+                local Head = Plr.Character:FindFirstChild("Head")
+                local Humanoid = Plr.Character:FindFirstChild("Humanoid")
+
+                if Hmrp and Head and Humanoid and PlayerHmrp then
+                    local distance = (Hmrp.Position - PlayerHmrp.Position).Magnitude
+
+                    local rootPos, rootVisible = Camera:WorldToViewportPoint(Hmrp.Position)
+                    local legsPos, rootVisible = Camera:WorldToViewportPoint(Hmrp.Position - Vector3.new(0, 0.5, 0))
+                    local headPos, headVisible = Camera:WorldToViewportPoint(Head.Position + Vector3.new(0, 0.75, 0) + Vector3.new(0, Head.Size.Y / 2, 0))
+                    
+                    local rootPosPlayer = Camera:WorldToViewportPoint(PlayerHmrp.Position)
+
+                    if rootVisible then
+                        showEsp = true
+
+                        if Settings.teamCheck then
+                            if Plr:GetAttribute("Team") ~= Player:GetAttribute("Team") or (Plr:GetAttribute("Team") == nil and Player:GetAttribute("Team") == nil) then
+                                showEsp = true
+                            else
+                                showEsp = false
+                            end
+                        end
+
+                        if not Settings.includeSelf and Plr == Player then showEsp = false end
+                        if Humanoid.Health == 0 and Settings.ignoreDead then showEsp = false end
+                        if distance > Settings.maxDistance then showEsp = false end
+
+                        if not showEsp then
+                            for _,Element in pairs(Elements) do
+                                Element.Visible = false
+                            end
+
+                            continue
+                        end
+
+                        local height = math.abs(legsPos.Y - headPos.Y) * 2
+                        local width = height / 1.5
+                        local distance = (Camera.CFrame.Position - Hmrp.Position).Magnitude
+                        local textSize = math.clamp(20 - (distance * 0.075), 12, 20)
+
+                        Elements["Box"].Size = Vector2.new(width, height)
+                        Elements["Box"].Position = Vector2.new(legsPos.X - width / 2, legsPos.Y - height / 2)
+                        Elements["Box"].Visible = Settings.Boxes.Enabled
+                        Elements["Box"].Filled = Settings.Boxes.Filled
+                        Elements["Box"].Color = Settings.Boxes.Color
+                        Elements["Box"].Transparency = Settings.Boxes.Filled and 0.5 or 1
+
+                        Elements["BoxOutline"].Size = Vector2.new(width + 2, height + 2)
+                        Elements["BoxOutline"].Position = Vector2.new(legsPos.X - width / 2, legsPos.Y - height / 2) + Vector2.new(-1,-1)
+                        Elements["BoxOutline"].Visible = Settings.Boxes.Enabled and Settings.Boxes.Outline and true or false
+                        Elements["BoxOutline"].Color = Settings.Boxes.OutlineColor
+
+                        local BoxTop = Elements["Box"].Position + Vector2.new(Elements["Box"].Size.X / 2,0)
+                        local BoxBottom = Elements["Box"].Position + Vector2.new(Elements["Box"].Size.X / 2,Elements["Box"].Size.Y)
+                        local BoxLeft = Elements["Box"].Position
+
+                        local HealthRatio = Humanoid.Health / Humanoid.MaxHealth
+                        local MissingHealth = 1 - HealthRatio
+
+                        Elements["Healthbar"].Size = Vector2.new(3,Elements["Box"].Size.Y)
+                        Elements["Healthbar"].Position = BoxLeft + Vector2.new(-7,0)
+                        Elements["Healthbar"].Visible = Settings.Healthbar.Enabled
+
+                        Elements["HealthbarFilling"].Size = Vector2.new(3, Elements["Box"].Size.Y * HealthRatio)
+                        Elements["HealthbarFilling"].Position = BoxLeft + Vector2.new(-7, Elements["Box"].Size.Y * MissingHealth)
+                        Elements["HealthbarFilling"].Color = Settings.Healthbar.FillColor
+                        Elements["HealthbarFilling"].Visible = Settings.Healthbar.Enabled
+
+                        Elements["NameLabel"].Size = textSize
+                        Elements["NameLabel"].Position = BoxTop + Vector2.new(0, -textSize * 1.5)
+                        Elements["NameLabel"].Outline = Settings.Names.Outline
+                        Elements["NameLabel"].Visible = Settings.Names.Enabled
+
+                        Elements["HealthLabel"].Size = textSize
+                        Elements["HealthLabel"].Position = BoxTop + Vector2.new(0, -textSize * 2.5)
+                        Elements["HealthLabel"].Text = "Health: " .. math.round(Humanoid.Health)
+                        Elements["HealthLabel"].Outline = Settings.HealthText.Outline
+                        Elements["HealthLabel"].Visible = Settings.HealthText.Enabled
+
+                        Elements["ToolLabel"].Size = textSize
+                        Elements["ToolLabel"].Position = BoxBottom + Vector2.new(0, textSize * 0.1)
+                        Elements["ToolLabel"].Outline = Settings.Tool.Outline
+                        Elements["ToolLabel"].Visible = Settings.Tool.Enabled
+
+                        if Tool then
+                            Elements["ToolLabel"].Text = Tool.Name
+                        else
+                            Elements["ToolLabel"].Text = "None"
+                        end
+
+                        Elements["Tracer"].From = Vector2.new(rootPosPlayer.X,rootPosPlayer.Y)
+                        Elements["Tracer"].To = Vector2.new(rootPos.X,rootPos.Y)
+                        Elements["Tracer"].Thickness = Settings.Tracers.Thickness
+                        Elements["Tracer"].Color = Settings.Tracers.Color
+                        Elements["Tracer"].Visible = Settings.Tracers.Enabled
+
+                        continue
+                    end
+                end
+            end
+
+            for _,Element in pairs(Elements) do
+                Element.Visible = false
+            end
+        end
+
+        for _,Element in pairs(Elements) do
+            Element:Remove()
+        end
+    end)
+end
+
+Players.PlayerAdded:Connect(function(Plr)
+    AddPlayer(Plr)
+end)
+
+for _, Plr in pairs(Players:GetPlayers()) do
+    AddPlayer(Plr)
+end
+
+return Settings
