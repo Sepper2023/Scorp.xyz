@@ -112,7 +112,7 @@ local function AddPlayer(Plr)
                         showEsp = true
 
                         if Settings.teamCheck then
-                            if Plr:GetAttribute("Team") ~= Player:GetAttribute("Team") or (Plr:GetAttribute("Team") == nil and Player:GetAttribute("Team") == nil) then
+                            if Plr:GetAttribute("Team") ~= Player:GetAttribute("Team") or (Plr:GetAttribute("Team") == "Neutral" and Player:GetAttribute("Team") == "Neutral") then
                                 showEsp = true
                             else
                                 showEsp = false
