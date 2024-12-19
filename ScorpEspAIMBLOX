@@ -100,11 +100,12 @@ local function AddPlayer(Plr)
                 local Humanoid = Plr.Character:FindFirstChild("Humanoid")
 
                 if Hmrp and Head and Humanoid and PlayerHmrp then
-                    local distance = (Hmrp.Position - PlayerHmrp.Position).Magnitude
+                    local HmrpPos = Hmrp.Position
+                    local distance = (HmrpPos - PlayerHmrp.Position).Magnitude
 
-                    local rootPos, rootVisible = Camera:WorldToViewportPoint(Hmrp.Position)
-                    local legsPos, rootVisible = Camera:WorldToViewportPoint(Hmrp.Position - Vector3.new(0, 0.5, 0))
-                    local headPos, headVisible = Camera:WorldToViewportPoint(Head.Position + Vector3.new(0, 0.75, 0) + Vector3.new(0, Head.Size.Y / 2, 0))
+                    local rootPos, rootVisible = Camera:WorldToViewportPoint(HmrpPos)
+                    local legsPos, rootVisible = Camera:WorldToViewportPoint(HmrpPos - Vector3.new(0, 0.5, 0))
+                    local headPos, headVisible = Camera:WorldToViewportPoint(HmrpPos + Vector3.new(0, 0.75, 0) + Vector3.new(0, Head.Size.Y / 2, 0))
                     
                     local rootPosPlayer = Camera:WorldToViewportPoint(PlayerHmrp.Position)
 
@@ -112,7 +113,10 @@ local function AddPlayer(Plr)
                         showEsp = true
 
                         if Settings.teamCheck then
-                            if Plr:GetAttribute("Team") ~= Player:GetAttribute("Team") or (Plr:GetAttribute("Team") == "Neutral" and Player:GetAttribute("Team") == "Neutral") then
+                            local PlrTeam = Plr:GetAttribute("Team")
+                            local MyTeam = Player:GetAttribute("Team")
+
+                            if PlrTeam ~= MyTeam or (PlrTeam == "Neutral" and MyTeam == "Neutral") then
                                 showEsp = true
                             else
                                 showEsp = false
@@ -120,7 +124,7 @@ local function AddPlayer(Plr)
                         end
 
                         if not Settings.includeSelf and Plr == Player then showEsp = false end
-                        if Humanoid.Health == 0 and Settings.ignoreDead then showEsp = false end
+                        if Humanoid.Health < 1 and Settings.ignoreDead then showEsp = false end
                         if distance > Settings.maxDistance then showEsp = false end
 
                         if not showEsp then
@@ -133,7 +137,7 @@ local function AddPlayer(Plr)
 
                         local height = math.abs(legsPos.Y - headPos.Y) * 2
                         local width = height / 1.5
-                        local distance = (Camera.CFrame.Position - Hmrp.Position).Magnitude
+                        local distance = (Camera.CFrame.Position - HmrpPos).Magnitude
                         local textSize = math.clamp(20 - (distance * 0.075), 12, 20)
 
                         Elements["Box"].Size = Vector2.new(width, height)
