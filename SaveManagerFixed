@@ -81,7 +81,6 @@ local SaveManager = {} do
 	function SaveManager:SetFolder(folder)
 		self.Folder = folder;
 
-		print("building folder tree from setfolder...")
 		self:BuildFolderTree()
 	end
 
@@ -145,9 +144,7 @@ local SaveManager = {} do
 		})
 	end
 
-	function SaveManager:BuildFolderTree()
-		print("Building folder tree for folder: "..self.Folder)
-	
+	function SaveManager:BuildFolderTree()	
 		local paths = {
 			self.Folder, --ScorpConfig/UnamedShooter
 			self.Folder .. '/themes',
@@ -277,7 +274,6 @@ local SaveManager = {} do
 		SaveManager:SetIgnoreIndexes({ 'SaveManager_ConfigList', 'SaveManager_ConfigName' })
 	end
 
-	print("building folder tree from loadconfig:",tab)
 	SaveManager:BuildFolderTree()
 end
 
