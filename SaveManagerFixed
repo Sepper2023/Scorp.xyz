@@ -10,12 +10,9 @@ local SaveManager = {} do
 			end,
 			Load = function(idx, data)
 				if Toggles[idx] then 
-                    if Toggles[idx].Value ~= data.value then
-			warn("toggled: "..Toggles[idx].TextLabel.Text.." on!")
-                        Toggles[idx]:SetValue(data.value)
-                    else
-                        warn("Ignored toggle: "..Toggles[idx].TextLabel.Text..", because it was already the same as the config!")
-                    end
+				    if Toggles[idx].Value ~= data.value then
+					Toggles[idx]:SetValue(data.value)
+				    end
 				end
 			end,
 		},
