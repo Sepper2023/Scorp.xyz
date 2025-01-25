@@ -3514,38 +3514,30 @@ function Library:CreateWindow(...)
         ModalElement.Modal = Toggled;
 
         if Toggled then
-            -- A bit scuffed, but if we're going from not toggled -> toggled we want to show the frame immediately so that the fade is visible.
             Outer.Visible = true;
 
             task.spawn(function()
-                -- TODO: add cursor fade?
-                local State = InputService.MouseIconEnabled;
-
                 local Cursor = Drawing.new('Square')
-                Cursor.Visible = true
+                Cursor.Visible = false
                 Cursor.Filled = true
                 Cursor.Size = Vector2.new(10,10)
                 
                 local CursorOutline = Drawing.new('Square')
-                CursorOutline.Visible = true
+                CursorOutline.Visible = false
                 CursorOutline.Filled = false
                 CursorOutline.Size = Vector2.new(10,10)
                 CursorOutline.Color = Color3.fromRGB(0,0,0)
 
                 while Toggled and ScreenGui.Parent do
-                    InputService.MouseIconEnabled = false;
-
                     local mPos = InputService:GetMouseLocation();
 
+                    Cursor.Visible = not InputService.MouseIconEnabled
                     Cursor.Color = Library.AccentColor;
-
                     Cursor.Position = Vector2.new(mPos.X, mPos.Y);
                     CursorOutline.Position = Vector2.new(mPos.X, mPos.Y);
 
                     RenderStepped:Wait();
                 end;
-
-                InputService.MouseIconEnabled = State;
 
                 Cursor:Remove();
                 CursorOutline:Remove();
