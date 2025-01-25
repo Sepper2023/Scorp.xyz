@@ -3532,6 +3532,8 @@ function Library:CreateWindow(...)
                     local mPos = InputService:GetMouseLocation();
 
                     Cursor.Visible = not InputService.MouseIconEnabled
+                    CursorOutline.Visible = not InputService.MouseIconEnabled
+
                     Cursor.Color = Library.AccentColor;
                     Cursor.Position = Vector2.new(mPos.X, mPos.Y);
                     CursorOutline.Position = Vector2.new(mPos.X, mPos.Y);
