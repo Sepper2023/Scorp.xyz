@@ -1,4 +1,4 @@
-print("loading")
+print("DEBUG LOADING")
 
 local Player = game:GetService("Players").LocalPlayer
 local LogService = game:GetService("LogService")
@@ -9,12 +9,11 @@ for i,v in pairs(getconnections(LogService.MessageOut)) do
     end
 end
 
-print("getting actor")
-
 local ReplicatedFirst = game:GetService("ReplicatedFirst")
 local Actor = ReplicatedFirst:WaitForChild("ReallyNotMainActor")
 
-print("GOT ACTOR")
+print("DEBUG WAITING FOR SCRIPT TO INITIALIZE")
+task.wait(5)
 
 run_on_actor(Actor,[[
         print("Code start")
