@@ -15,6 +15,9 @@ local Actor = ReplicatedFirst:WaitForChild("ReallyNotMainActor")
 print("DEBUG WAITING FOR SCRIPT TO INITIALIZE")
 task.wait(5)
 
+print(Actor)
+print("running")
+
 run_on_actor(Actor,[[
         print("Code start")
 
